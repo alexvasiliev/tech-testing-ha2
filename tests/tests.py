@@ -42,6 +42,7 @@ class TestCase(unittest.TestCase):
             last_campaign.delete_campaign()
         self.driver.quit()
 
+
     def test_base_settings_small_picture(self):
         create_page = CreatePage(self.driver)
         create_page.open()
@@ -146,7 +147,6 @@ class TestCase(unittest.TestCase):
         banner_after = banner.get_banner_info()
         check = banner_before == banner_after
         self.assertTrue(check)
-
 
     def test_regions_deep(self):
         create_page = CreatePage(self.driver)

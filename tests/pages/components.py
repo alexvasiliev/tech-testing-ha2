@@ -93,7 +93,6 @@ class BaseSettings(Component):
         BANNER_PREVIEW = '.banner-preview__img'
         images = self.driver.find_elements_by_css_selector(BANNER_PREVIEW)
         for element in images:
-            print "width" + element.value_of_css_property("width")
             if element.value_of_css_property("width") == '320px':
                 return element
 
@@ -173,9 +172,6 @@ class BaseSettingsSmall(Component):
 
 class Where(Component):
     CHECKBOXES = '[data-name="regions"] .tree__node__input'
-#    CHECKBOXES_RUS = '[data-name="regions"] .tree__node__list'
-#    SETTING_VALUE_RUS = '[data-valid-flag="regions"] [data-name="regions"] .tree__node__value'
-#    SETTING_VALUE_ANOTHER = '[data-valid-flag="regions"] [data-name="regions"] .tree__node__value'
 
     def check_rus(self):
         check = self.driver.find_elements_by_css_selector(self.CHECKBOXES)[0]
@@ -212,20 +208,16 @@ class Where(Component):
         return checked
 
     def where_deep_checked(self):
-        #change = WebDriverWait(self.driver, 30, 0.1).until(
-        #    lambda d: d.find_element_by_xpath("//span[@class='tree__node__collapse-icon']")#[data-node-id = 'Россия']")
-        #)
         change = WebDriverWait(self.driver, 30, 0.1).until(
-            lambda d: d.find_element_by_css_selector('li[id="regions188"] span[data-node-id="Россия"]')#lambda d: d.find_element_by_css_selector('li[class="tree__node tree__node_collapsed has_children"] span[data-node-id="Россия"]')
+            lambda d: d.find_element_by_css_selector('li[id="regions188"] span[data-node-id="Россия"]')
         )
         change.click()
 
         check = WebDriverWait(self.driver, 30, 0.1).until(
-            lambda d: d.find_element_by_css_selector('li[class="tree__node tree__node_collapsed"] span[data-node-id="Алтайскийкрай"]')#lambda d: d.find_element_by_id('view9678')#lambda d: d.find_element_by_css_selector('input[id="view9661"]')
+            lambda d: d.find_element_by_css_selector('li[id="regions7"] input[type="checkbox"]')#Алтайский край
         )
         if check.is_selected():
-            print "False"
-#            return False
+            return False
 
         change.click()
 
@@ -241,43 +233,11 @@ class Where(Component):
         change.click()
 
         check = WebDriverWait(self.driver, 30, 0.1).until(
-            lambda d: d.find_element_by_css_selector('li[class="tree__node tree__node_collapsed"] span[data-node-id="Австралия"]')
+            lambda d: d.find_element_by_css_selector('li[id="regions217"] input[type="checkbox"]')#Австралия
         )
 
         if check.is_selected():
-            print "true"
-#            return True
-"""
-        check = WebDriverWait(self.driver, 30, 0.1).until(
-            lambda d: d.find_elements_by_id('view9661')
-        )
-        if check.is_selected():
-            print "1"
-        checks = self.driver.find_elements_by_css_selector('tree__node__input')
-        for element in checks:
-            if element.value_of_css_property("id") == 'view9661':
-                if element.is_selected():
-                    print "2"
-
-        check = WebDriverWait(self.driver, 30, 0.1).until(
-            lambda d: d.find_element_by_xpath("//span[@class='tree__node__input'][id = 'view9661']")
-        )
-
-        if check.is_selected():
-            print "3"
-
-        return False
-
-        check = WebDriverWait(self.driver, 30, 0.1).until(
-            lambda d: d.find_element_by_css_selector('li[class="tree__node__input"] span[id="view9661"]')
-        )
-        if check.is_selected():
-            return False
-        check = WebDriverWait(self.driver, 30, 0.1).until(
-            lambda d: d.find_element_by_css_selector('li[class="tree__node__input"] span[id="view10358"]')
-        )
-        if check.is_selected():
-            return True"""
+            return True
 
 
 
